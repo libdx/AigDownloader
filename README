@@ -1,0 +1,5 @@
+This is AigDownloader, a simple file downloader. 
+It's created just for learning glib, gio, gtk and other gnome based libraries and technologies, nothing serious.
+
+This software provides under terms of GNU GPL.
+
