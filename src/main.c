@@ -11,6 +11,9 @@ G_MODULE_EXPORT void download_button_clicked(GtkObject *gtkObject, gpointer user
 
 // Downloading
 void perform_download();
+void download_progress(goffset currentNumBytes, goffset totalNumBytes, gpointer userData);
+void download_finished(GObject *sourceObject, GAsyncResult *result, gpointer userData);
+
 // Different download mechanisms
 void perform_download_by_reading();
 void perform_download_by_copying();
@@ -45,7 +48,8 @@ G_MODULE_EXPORT void download_button_clicked(GtkObject *gtkObject, gpointer user
 // Downloading
 void perform_download()
 {
-    perform_download_by_reading();
+    //perform_download_by_reading();
+    perform_download_by_copying();
 }
 
 // Different download mechanisms
@@ -55,6 +59,10 @@ void perform_download_by_reading()
 
     GFile *inFile = g_file_new_for_uri(gtk_entry_get_text(GTK_ENTRY(gUrlEntry)));
     GFileInputStream *fileInputStream = g_file_read(inFile, NULL, &error);
+    if (error != NULL)
+    {
+        g_print("Error: %s\n", error->message);
+    }
 
     g_print("start downloading file: %s\n", gtk_entry_get_text(GTK_ENTRY(gUrlEntry)));
     char *inFileBasename = g_file_get_basename(inFile);
@@ -76,4 +84,19 @@ void perform_download_by_reading()
 
 void perform_download_by_copying()
 {
+    GFile *inFile = g_file_new_for_uri(gtk_entry_get_text(GTK_ENTRY(gUrlEntry)));
+    char *inFileBasename = g_file_get_basename(inFile);
+    GFile *outFile = g_file_new_for_path(inFileBasename);
+
+    g_file_copy_async(inFile, outFile, G_FILE_COPY_BACKUP, G_PRIORITY_DEFAULT, NULL, download_progress, NULL, download_finished, NULL);
+}
+
+void download_progress(goffset currentNumBytes, goffset totalNumBytes, gpointer userData)
+{
+    g_print("\rProgress: %f%%",(gdouble)((gdouble)currentNumBytes) / (gdouble)totalNumBytes * 100);
+}
+
+void download_finished(GObject *sourceObject, GAsyncResult *result, gpointer userData)
+{
+    printf("\nDownloading is finished\n");
 }
