@@ -14,16 +14,20 @@ LIBS = `$(PKGCONFIG) --libs $(PACKAGES)`
 
 CCARGS = $(CFLAGS) $(LIBS) $(DEBUG)
 
-main: main.o
+main:preper main.o
 	$(CC) -o bin/$(APPNAME) bin/main.o $(CCARGS)
 	ln -sf bin/$(APPNAME) x
 
 main.o:
 	$(CC) -o bin/main.o -c src/main.c $(CCARGS)
 
+preper:
+	$(shell if ! test -d bin; then mkdir bin; fi)
+
 clean:
 	rm -f bin/$(APPNAME)
 	rm -f bin/main.o
+	rm -rf bin
 	rm -f x
 
 #debug:
