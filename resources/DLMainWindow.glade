@@ -160,14 +160,26 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="downloadButton">
-                <property name="label" translatable="yes">Download</property>
+              <object class="GtkVButtonBox" id="vbuttonbox1">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="download_button_clicked"/>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkButton" id="downloadButton">
+                    <property name="label" translatable="yes">download</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="download_button_clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
               </object>
               <packing>
+                <property name="expand">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -175,6 +187,17 @@
           <packing>
             <property name="expand">False</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="downloadProgressBar">
+            <property name="visible">True</property>
+            <property name="activity_mode">True</property>
+            <property name="show_text">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>

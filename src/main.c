@@ -5,6 +5,7 @@
 
 // Some global var used as class's members as if the main function were application controller
 GtkWidget *gUrlEntry = NULL;
+GtkWidget *gProgressBar = NULL;
 
 // Signals
 G_MODULE_EXPORT void download_button_clicked(GtkObject *gtkObject, gpointer userData);
@@ -29,6 +30,8 @@ int main(int argc, char *argv[])
 
     GtkWidget *mainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "mainWindow"));
     gUrlEntry = GTK_WIDGET(gtk_builder_get_object(builder, "urlEntry"));
+    gProgressBar = GTK_WIDGET(gtk_builder_get_object(builder, "downloadProgressBar"));
+    gtk_progress_bar_update(GTK_PROGRESS_BAR(gProgressBar), 0.2f);
 
     g_object_unref(G_OBJECT(builder));
 
