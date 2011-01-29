@@ -96,7 +96,8 @@ void perform_download_by_copying()
 
 void download_progress(goffset currentNumBytes, goffset totalNumBytes, gpointer userData)
 {
-    gtk_progress_bar_update(GTK_PROGRESS_BAR(gProgressBar), (gdouble)currentNumBytes / (gdouble)totalNumBytes);
+    //gtk_progress_bar_update(GTK_PROGRESS_BAR(gProgressBar), (gdouble)currentNumBytes / (gdouble)totalNumBytes);
+    gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gProgressBar), (gdouble)currentNumBytes / (gdouble)totalNumBytes);
     g_print("\rProgress: %f%%",(gdouble)((gdouble)currentNumBytes) / (gdouble)totalNumBytes * 100);
 }
 
