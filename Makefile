@@ -14,12 +14,15 @@ LIBS = `$(PKGCONFIG) --libs $(PACKAGES)`
 
 CCARGS = $(CFLAGS) $(LIBS) $(DEBUG)
 
-main:main.o
-	$(CC) -o bin/$(APPNAME) bin/main.o $(CCARGS)
+main:main.o DLApplication.o
+	$(CC) -o bin/$(APPNAME) bin/main.o bin/DLApplication.o $(CCARGS)
 	ln -sf bin/$(APPNAME) x
 
 main.o:
 	$(CC) -o bin/main.o -c src/main.c $(CCARGS)
+
+DLApplication.o:
+	$(CC) -o bin/DLApplication.o -c src/DLApplication.c $(CCARGS)
 
 clean:
 	rm -f bin/$(APPNAME)

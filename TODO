@@ -1,2 +1,1 @@
-Avoid deprecated function:
-    gtk_progress_bar_update()
+Added signals into Application class

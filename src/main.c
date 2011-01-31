@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
+#include "DLApplication.h"
 
 // TODO release data before quit application
 
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
 {
     gtk_init(&argc, &argv);
 
+    //DLApplication *application = dl_application_new();
+    //dl_application_run(application);
+
     GtkBuilder *builder = gtk_builder_new();
     GError *error = NULL;
     gtk_builder_add_from_file(builder, "resources/DLMainWindow.glade", &error);
@@ -31,7 +35,7 @@ int main(int argc, char *argv[])
     GtkWidget *mainWindow = GTK_WIDGET(gtk_builder_get_object(builder, "mainWindow"));
     gUrlEntry = GTK_WIDGET(gtk_builder_get_object(builder, "urlEntry"));
     gProgressBar = GTK_WIDGET(gtk_builder_get_object(builder, "downloadProgressBar"));
-    gtk_progress_bar_update(GTK_PROGRESS_BAR(gProgressBar), 0.0f);
+    gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gProgressBar), 0.0f);
 
     g_object_unref(G_OBJECT(builder));
 
@@ -96,7 +100,6 @@ void perform_download_by_copying()
 
 void download_progress(goffset currentNumBytes, goffset totalNumBytes, gpointer userData)
 {
-    //gtk_progress_bar_update(GTK_PROGRESS_BAR(gProgressBar), (gdouble)currentNumBytes / (gdouble)totalNumBytes);
     gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(gProgressBar), (gdouble)currentNumBytes / (gdouble)totalNumBytes);
     g_print("\rProgress: %f%%",(gdouble)((gdouble)currentNumBytes) / (gdouble)totalNumBytes * 100);
 }
