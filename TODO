@@ -1,1 +1,8 @@
-Added signals into Application class
+FTP support:
+    anonymous
+    request username and password in dialog window
+Pause/continue downloading
+Multithreding download
+Complex download widget
+Settings
+Setting for ftp servers
