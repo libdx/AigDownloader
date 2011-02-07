@@ -1,0 +1,40 @@
+#!/bin/bash
+
+printHelp()
+{
+    echo "$0 PREFIX prefix SUFFIX Suffix suffix ParentType PARENT_TYPE_MACROS"
+}
+
+catTemplate()
+{
+    _TEMPLATE_NAME=$1
+    _OUTPUT_NAME=$2
+    _PREFIX=$3
+    _prefix=$4
+    _SUFFIX=$5
+    _Suffix=$6
+    _suffix=$7
+    _ParentType=$8
+    _PARENT_TYPE_MACROS=$9
+
+    cat $_TEMPLATE_NAME | \
+        sed "s/PREFIX/$_PREFIX/g" | \
+        sed "s/prefix/$_prefix/g" | \
+        sed "s/SUFFIX/$_SUFFIX/g" | \
+        sed "s/Suffix/$_Suffix/g" | \
+        sed "s/suffix/$_suffix/g" | \
+        sed "s/ParentType/$_ParentType/g" | \
+        sed "s/PARENT_TYPE_MACROS/$_PARENT_TYPE_MACROS/g" > \
+        $_OUTPUT_NAME
+}
+
+_PREFIX=$1
+_prefix=$2
+_SUFFIX=$3
+_Suffix=$4
+_suffix=$5
+_ParentType=$6
+_PARENT_TYPE_MACROS=$7
+
+catTemplate "templates/class.h" generatedClass.h $_PREFIX $_prefix $_SUFFIX $_Suffix $_suffix $_ParentType $_PARENT_TYPE_MACROS
+catTemplate "templates/class.c" generatedClass.c $_PREFIX $_prefix $_SUFFIX $_Suffix $_suffix $_ParentType $_PARENT_TYPE_MACROS

@@ -36,7 +36,4 @@ GType dl_application_get_type();
 DLApplication *dl_application_new();
 void dl_application_run(DLApplication *self);
 
-void dl_application_dispose(GObject *gobject);
-
-
 #endif // __DL_APPLICATION_H__

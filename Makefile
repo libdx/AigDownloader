@@ -14,7 +14,7 @@ LIBS = `$(PKGCONFIG) --libs $(PACKAGES)`
 
 CCARGS = $(CFLAGS) $(LIBS) $(DEBUG)
 
-main:main.o DLApplication.o
+main:main.o DLApplication.o DLDownloadWidgetController.o
 	$(CC) -o bin/$(APPNAME) bin/main.o bin/DLApplication.o $(CCARGS)
 	ln -sf bin/$(APPNAME) x
 
@@ -24,12 +24,11 @@ main.o:
 DLApplication.o:
 	$(CC) -o bin/DLApplication.o -c src/DLApplication.c $(CCARGS)
 
-clean:
-	rm -f bin/$(APPNAME)
-	rm -f bin/main.o
-	rm -f x
+DLDownloadWidgetController.o:
+	$(CC) -o bin/DLDownloadWidgetController.o -c src/controllers/DLDownloadWidgetController.c $(CCARGS)
 
-#debug:
-#	$(CC) -o /tmp/widgetController.h -E src/AIWidgetController.h $(CFLAGS) $(LIBS)
+clean:
+	rm -f bin/*
+	rm -f x
 
 .PHONY: clean

@@ -6,9 +6,11 @@
 void dl_application_run_real(DLApplication *self);
 
 // Signals' callbacks
-G_MODULE_EXPORT void dl_application_download_button_clicked(gpointer selfRef, GtkObject *gtkObject);
+void dl_application_download_button_clicked(gpointer selfRef, GtkObject *gtkObject);
 
 // Private methods
+void dl_application_dispose(GObject *gobject);
+
 void dl_application_perform_download(DLApplication *self);
 void dl_application_download_progress(goffset currentNumBytes, goffset totalNumBytes, gpointer selfRef);
 void dl_application_download_finished(GObject *sourceObject, GAsyncResult *result, gpointer selfRef);
@@ -23,6 +25,8 @@ struct _DLApplicationPrivate
     GtkWidget *downloadButton;
     GtkWidget *progressBar;
 };
+
+G_DEFINE_TYPE(DLApplication, dl_application, G_TYPE_OBJECT);
 
 // Class constructor
 static void dl_application_class_init(DLApplicationClass *klass)
@@ -67,8 +71,6 @@ DLApplication *dl_application_new()
     return g_object_new(DL_TYPE_APPLICATION, NULL);
 }
 
-G_DEFINE_TYPE(DLApplication, dl_application, G_TYPE_OBJECT);
-
 // Virtual method's wrappers
 void dl_application_run(DLApplication *self)
 {
@@ -102,7 +104,7 @@ void dl_application_dispose(GObject *gobject)
 }
 
 // Signals' callbacks
-G_MODULE_EXPORT void dl_application_download_button_clicked(gpointer selfRef, GtkObject *gtkObject)
+void dl_application_download_button_clicked(gpointer selfRef, GtkObject *gtkObject)
 {
     DLApplication *self = DL_APPLICATION(selfRef);
     dl_application_perform_download((self));
