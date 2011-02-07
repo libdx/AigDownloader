@@ -1,8 +1,10 @@
+Test class-generator
+Complex download widget
+Search
 FTP support:
     anonymous
     request username and password in dialog window
-Pause/continue downloading
+Pause/resume downloading
 Multithreding download
-Complex download widget
 Settings
 Setting for ftp servers

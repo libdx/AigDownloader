@@ -69,7 +69,7 @@ PREFIXSuffix *prefix_suffix_new()
 // Deallocation
 void prefix_suffix_dispose(GObject *gobject)
 {
-    PREFIXSuffix *self = PREFIX_SUFFIX(gobject);
+    //PREFIXSuffix *self = PREFIX_SUFFIX(gobject);
 
     //if (self->priv->member)
     //{
@@ -79,6 +79,6 @@ void prefix_suffix_dispose(GObject *gobject)
     G_OBJECT_CLASS(prefix_suffix_parent_class)->dispose(gobject);
 }
 
-void prefix_suffix_finalize(GObject *gobject);
+void prefix_suffix_finalize(GObject *gobject)
 {
 }
