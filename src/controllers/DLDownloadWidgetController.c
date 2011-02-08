@@ -3,7 +3,7 @@
 #include <gio/gio.h>
 
 // Private real methods prototypes
-GPtrArray *dl_download_widget_controller_search_real(DLDownloadWidgetController *self);
+void dl_download_widget_controller_match_with_str_real(DLDownloadWidgetController *self);
 
 // Private prototypes
 void dl_download_widget_controller_dispose(GObject *object);
@@ -26,7 +26,7 @@ void dl_download_widget_controller_class_init(DLDownloadWidgetControllerClass *k
     
     gobjectClass->dispose = dl_download_widget_controller_dispose;
     
-    klass->search = dl_download_widget_controller_search_real;
+    klass->match_with_str = dl_download_widget_controller_match_with_str_real;
     
     g_type_class_add_private(klass, sizeof(DLDownloadWidgetControllerPrivate));
 }
@@ -43,9 +43,9 @@ DLDownloadWidgetController *dl_download_widget_controller_new()
     return g_object_new(DL_TYPE_DOWNLOAD_WIDGET_CONTROLLER, NULL);
 }
 
-GPtrArray *dl_download_widget_controller_search(DLDownloadWidgetController *self /*params*/)
+void dl_download_widget_controller_match_with_str(DLDownloadWidgetController *self /*params*/)
 {
-    return DL_DOWNLOAD_WIDGET_CONTROLLER_GET_CLASS(self)->search(self);
+    return DL_DOWNLOAD_WIDGET_CONTROLLER_GET_CLASS(self)->match_with_str(self);
 }
 
 // Deallocation
@@ -67,8 +67,8 @@ void dl_application_dispose(GObject *gobject)
 }
 
 // Real methods implementation
-GPtrArray *dl_download_widget_controller_search_real(DLDownloadWidgetController *self)
+void dl_download_widget_controller_match_with_str_real(DLDownloadWidgetController *self)
 {
-    GPtrArray *ptrArray = NULL;
-    return ptrArray;
+    //GPtrArray *ptrArray = NULL;
+    //return ptrArray;
 }

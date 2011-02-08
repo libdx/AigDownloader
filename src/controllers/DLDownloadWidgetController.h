@@ -28,7 +28,7 @@ struct _DLDownloadWidgetControllerClass
 {
     GObjectClass *parent_class;
 
-    GPtrArray *(*search)(DLDownloadWidgetController *self);
+    void (*match_with_str)(DLDownloadWidgetController *self);
 };
 
 // Public methonds
@@ -36,6 +36,6 @@ struct _DLDownloadWidgetControllerClass
 GType dl_download_widget_controller_get_type();
 
 DLDownloadWidgetController *dl_download_widget_controller_new();
-GPtrArray *dl_download_widget_controller_search(DLDownloadWidgetController *self /*params*/);
+void dl_download_widget_controller_match_with_str(DLDownloadWidgetController *self /*params*/);
 
 #endif // __DL_DOWNLOAD_WIDGET_CONTROLLER_H__

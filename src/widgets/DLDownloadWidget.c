@@ -69,7 +69,7 @@ DLDownloadWidget *dl_download_widget_new()
 // Deallocation
 void dl_download_widget_dispose(GObject *gobject)
 {
-    DLDownloadWidget *self = DL_DOWNLOAD_WIDGET(gobject);
+    //DLDownloadWidget *self = DL_DOWNLOAD_WIDGET(gobject);
 
     //if (self->priv->member)
     //{
