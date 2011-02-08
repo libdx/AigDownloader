@@ -20,7 +20,9 @@ void dl_download_widget_download_finished(GObject *sourceObject, GAsyncResult *r
 
 struct _DLDownloadWidgetPrivate
 {
-    //GObject *member;
+    GtkEntry *urlEntry;
+    GtkButton *downloadButton;
+    GtkProgressBar *downloadProgressBar;
 };
 
 G_DEFINE_TYPE(DLDownloadWidget, dl_download_widget, GTK_TYPE_WIDGET);
@@ -46,6 +48,16 @@ static void dl_download_widget_init(DLDownloadWidget *self)
     self->priv = priv;
     
     // init private members
+    GtkBuilder *builder = gtk_builder_new();
+    GError *error = NULL;
+    gtk_builder_add_from_file(builder, "resources/DLDownloadWidget.glade", &error);
+    gtk_builder_connect_signals(builder, NULL);
+
+    self->priv->urlEntry = GTK_ENTRY(gtk_builder_get_object(builder, "urlEntry"));
+    self->priv->downloadButton = GTK_BUTTON(gtk_builder_get_object(builder, "downloadButton"));
+    self->priv->downloadProgressBar = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "downloadProgressBar"));
+
+    g_object_unref(G_OBJECT(builder));
 }
 
 DLDownloadWidget *dl_download_widget_new()
@@ -82,3 +94,20 @@ void dl_download_widget_dispose(GObject *gobject)
 void dl_download_widget_finalize(GObject *gobject)
 {
 }
+
+// Getters
+GtkEntry *dl_download_widget_get_url_entry(DLDownloadWidget *self)
+{
+    return self->priv->urlEntry;
+}
+
+GtkButton *dl_download_widget_get_download_button(DLDownloadWidget *self)
+{
+    return self->priv->downloadButton;
+}
+
+GtkProgressBar *dl_download_widget_get_download_progress_bar(DLDownloadWidget *self)
+{
+    return self->priv->downloadProgressBar;
+}
+

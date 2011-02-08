@@ -34,5 +34,9 @@ GType dl_download_widget_get_type();
 
 DLDownloadWidget *dl_download_widget_new();
 void dl_download_widget_run(DLDownloadWidget *self);
+// Getters (may be use property?)
+GtkEntry *dl_download_widget_get_url_entry(DLDownloadWidget *self);
+GtkButton *dl_download_widget_get_download_button(DLDownloadWidget *self);
+GtkProgressBar *dl_download_widget_get_download_progress_bar(DLDownloadWidget *self);
 
 #endif // __DL_DOWNLOAD_WIDGET_H__
