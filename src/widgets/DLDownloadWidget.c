@@ -20,8 +20,10 @@ void dl_download_widget_download_finished(GObject *sourceObject, GAsyncResult *r
 
 struct _DLDownloadWidgetPrivate
 {
+    GtkVBox *downloadVerticalBox;
     GtkEntry *urlEntry;
     GtkButton *downloadButton;
+    GtkButton *cancelButton;
     GtkProgressBar *downloadProgressBar;
 };
 
@@ -53,8 +55,11 @@ static void dl_download_widget_init(DLDownloadWidget *self)
     gtk_builder_add_from_file(builder, "resources/DLDownloadWidget.glade", &error);
     gtk_builder_connect_signals(builder, NULL);
 
+// TODO cloning all widgets containing in vertical box conteiner
+    self->priv->downloadVerticalBox = GTK_VBOX(gtk_builder_get_object(builder, "downloadVerticalBox"));
     self->priv->urlEntry = GTK_ENTRY(gtk_builder_get_object(builder, "urlEntry"));
     self->priv->downloadButton = GTK_BUTTON(gtk_builder_get_object(builder, "downloadButton"));
+    self->priv->cancelButton = GTK_BUTTON(gtk_builder_get_object(builder, "cancelButton"));
     self->priv->downloadProgressBar = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "downloadProgressBar"));
 
     g_object_unref(G_OBJECT(builder));

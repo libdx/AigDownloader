@@ -24,6 +24,9 @@ struct _DLApplicationPrivate
     GtkWidget *urlEntry;
     GtkWidget *downloadButton;
     GtkWidget *progressBar;
+
+    GtkButton *addDownload;
+    GList *downloadWidgetControllers;
 };
 
 G_DEFINE_TYPE(DLApplication, dl_application, G_TYPE_OBJECT);

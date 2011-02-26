@@ -37,5 +37,9 @@ GType dl_download_widget_controller_get_type();
 
 DLDownloadWidgetController *dl_download_widget_controller_new();
 void dl_download_widget_controller_match_with_str(DLDownloadWidgetController *self /*params*/);
+// get_download_widget_if_matched_string
+GString *dl_download_widget_controller_get_file_basename(DLDownloadWidgetController *self);
+GDate *dl_download_widget_controller_get_created_at_date(DLDownloadWidgetController *self);
+
 
 #endif // __DL_DOWNLOAD_WIDGET_CONTROLLER_H__
