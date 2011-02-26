@@ -20,14 +20,14 @@ void dl_download_widget_download_finished(GObject *sourceObject, GAsyncResult *r
 
 struct _DLDownloadWidgetPrivate
 {
-    GtkVBox *downloadVerticalBox;
+    //GtkVBox *downloadVerticalBox;
     GtkEntry *urlEntry;
     GtkButton *downloadButton;
     GtkButton *cancelButton;
     GtkProgressBar *downloadProgressBar;
 };
 
-G_DEFINE_TYPE(DLDownloadWidget, dl_download_widget, GTK_TYPE_WIDGET);
+G_DEFINE_TYPE(DLDownloadWidget, dl_download_widget, GTK_TYPE_VBOX);
 
 // Class constructor
 static void dl_download_widget_class_init(DLDownloadWidgetClass *klass)
@@ -50,19 +50,40 @@ static void dl_download_widget_init(DLDownloadWidget *self)
     self->priv = priv;
     
     // init private members
-    GtkBuilder *builder = gtk_builder_new();
-    GError *error = NULL;
-    gtk_builder_add_from_file(builder, "resources/DLDownloadWidget.glade", &error);
-    gtk_builder_connect_signals(builder, NULL);
+    // TODO try create widget using XML parsing (glade)
+    //GtkBuilder *builder = gtk_builder_new();
+    //GError *error = NULL;
+    //gtk_builder_add_from_file(builder, "resources/DLDownloadWidget.glade", &error);
+    //gtk_builder_connect_signals(builder, NULL);
 
-// TODO cloning all widgets containing in vertical box conteiner
-    self->priv->downloadVerticalBox = GTK_VBOX(gtk_builder_get_object(builder, "downloadVerticalBox"));
-    self->priv->urlEntry = GTK_ENTRY(gtk_builder_get_object(builder, "urlEntry"));
-    self->priv->downloadButton = GTK_BUTTON(gtk_builder_get_object(builder, "downloadButton"));
-    self->priv->cancelButton = GTK_BUTTON(gtk_builder_get_object(builder, "cancelButton"));
-    self->priv->downloadProgressBar = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "downloadProgressBar"));
+    //self->priv->downloadVerticalBox = GTK_VBOX(gtk_builder_get_object(builder, "downloadVerticalBox"));
+    //self->priv->urlEntry = GTK_ENTRY(gtk_builder_get_object(builder, "urlEntry"));
+    //self->priv->downloadButton = GTK_BUTTON(gtk_builder_get_object(builder, "downloadButton"));
+    //self->priv->cancelButton = GTK_BUTTON(gtk_builder_get_object(builder, "cancelButton"));
+    //self->priv->downloadProgressBar = GTK_PROGRESS_BAR(gtk_builder_get_object(builder, "downloadProgressBar"));
+    //
+    //g_object_unref(G_OBJECT(builder));
 
-    g_object_unref(G_OBJECT(builder));
+    //priv->downloadVerticalBox = gtk_vbox_new();
+    priv->urlEntry = GTK_ENTRY(gtk_entry_new());
+    priv->downloadButton = GTK_BUTTON(gtk_button_new_with_label("download"));
+    priv->cancelButton = GTK_BUTTON(gtk_button_new_with_label("cancel"));
+    priv->downloadProgressBar = GTK_PROGRESS_BAR(gtk_progress_bar_new());
+
+    // Layout
+    GtkHButtonBox *horButtonBox = GTK_HBUTTON_BOX(gtk_hbutton_box_new());
+    gtk_container_add(GTK_CONTAINER(horButtonBox), GTK_WIDGET(priv->downloadButton));
+    gtk_container_add(GTK_CONTAINER(horButtonBox), GTK_WIDGET(priv->cancelButton));
+
+    GtkHBox *horBox = GTK_HBOX(gtk_hbox_new(FALSE, 0));
+    gtk_container_add(GTK_CONTAINER(horBox), GTK_WIDGET(priv->urlEntry));
+    gtk_container_add(GTK_CONTAINER(horBox), GTK_WIDGET(horButtonBox));
+
+    gtk_container_add(GTK_CONTAINER(self), GTK_WIDGET(horBox));
+    gtk_container_add(GTK_CONTAINER(self), GTK_WIDGET(priv->downloadProgressBar));
+
+    gtk_box_set_homogeneous(GTK_BOX(self), FALSE);
+    gtk_box_set_spacing(GTK_BOX(self), 0);
 }
 
 DLDownloadWidget *dl_download_widget_new()

@@ -17,7 +17,7 @@ typedef struct _DLDownloadWidgetClass DLDownloadWidgetClass;
 
 struct _DLDownloadWidget
 {
-    GtkWidget parent_instance;
+    GtkVBox parent_instance;
 
     DLDownloadWidgetPrivate *priv;
 };
