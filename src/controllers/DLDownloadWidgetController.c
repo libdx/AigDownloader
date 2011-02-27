@@ -2,8 +2,11 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
+#include "../widgets/DLDownloadWidget.h"
+
 // Private real methods prototypes
 void dl_download_widget_controller_match_with_str_real(DLDownloadWidgetController *self);
+GtkWidget *dl_download_widget_controller_get_download_widget_real(DLDownloadWidgetController *self);
 
 // Private prototypes
 void dl_download_widget_controller_dispose(GObject *object);
@@ -27,6 +30,7 @@ void dl_download_widget_controller_class_init(DLDownloadWidgetControllerClass *k
     gobjectClass->dispose = dl_download_widget_controller_dispose;
     
     klass->match_with_str = dl_download_widget_controller_match_with_str_real;
+    klass->get_download_widget = dl_download_widget_controller_get_download_widget_real;
     
     g_type_class_add_private(klass, sizeof(DLDownloadWidgetControllerPrivate));
 }
@@ -36,6 +40,7 @@ void dl_download_widget_controller_init(DLDownloadWidgetController *self)
     self->priv = DL_DOWNLOAD_WIDGET_CONTROLLER_GET_PRIVATE(self);
 
     // init private members
+    self->priv->downloadWidget = GTK_WIDGET(dl_download_widget_new());
 }
 
 DLDownloadWidgetController *dl_download_widget_controller_new()
@@ -45,11 +50,16 @@ DLDownloadWidgetController *dl_download_widget_controller_new()
 
 void dl_download_widget_controller_match_with_str(DLDownloadWidgetController *self /*params*/)
 {
-    return DL_DOWNLOAD_WIDGET_CONTROLLER_GET_CLASS(self)->match_with_str(self);
+    DL_DOWNLOAD_WIDGET_CONTROLLER_GET_CLASS(self)->match_with_str(self);
+}
+
+GtkWidget *dl_download_widget_controller_get_download_widget(DLDownloadWidgetController *self)
+{
+    return DL_DOWNLOAD_WIDGET_CONTROLLER_GET_CLASS(self)->get_download_widget(self);
 }
 
 // Deallocation
-void dl_application_dispose(GObject *gobject)
+void dl_download_widget_controller_dispose(GObject *gobject)
 {
     DLDownloadWidgetController *self = DL_DOWNLOAD_WIDGET_CONTROLLER(gobject);
 
@@ -69,6 +79,9 @@ void dl_application_dispose(GObject *gobject)
 // Real methods implementation
 void dl_download_widget_controller_match_with_str_real(DLDownloadWidgetController *self)
 {
-    //GPtrArray *ptrArray = NULL;
-    //return ptrArray;
+}
+
+GtkWidget *dl_download_widget_controller_get_download_widget_real(DLDownloadWidgetController *self)
+{
+    return self->priv->downloadWidget;
 }

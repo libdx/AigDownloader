@@ -6,7 +6,7 @@
     <property name="title" translatable="yes">downloader</property>
     <signal name="destroy" handler="gtk_main_quit"/>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkVBox" id="rootVerBox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <child>

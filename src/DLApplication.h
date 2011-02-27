@@ -5,6 +5,8 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
+#include "controllers/DLDownloadWidgetController.h"
+
 #define DL_TYPE_APPLICATION                  (dl_application_get_type ())
 #define DL_APPLICATION(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), DL_TYPE_APPLICATION, DLApplication))
 #define DL_IS_APPLICATION(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), DL_TYPE_APPLICATION))

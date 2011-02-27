@@ -2,6 +2,9 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
+#include "controllers/DLDownloadWidgetController.h"
+#include "widgets/DLDownloadWidget.h"
+
 // Real virtual method prototypes
 void dl_application_run_real(DLApplication *self);
 
@@ -24,6 +27,7 @@ struct _DLApplicationPrivate
     GtkWidget *urlEntry;
     GtkWidget *downloadButton;
     GtkWidget *progressBar;
+    GtkWidget *rootVerBox;
 
     GtkButton *addDownload;
     GList *downloadWidgetControllers;
@@ -61,10 +65,16 @@ static void dl_application_init(DLApplication *self)
     self->priv->downloadButton = GTK_WIDGET(gtk_builder_get_object(builder, "downloadButton"));
     self->priv->progressBar = GTK_WIDGET(gtk_builder_get_object(builder, "downloadProgressBar"));
 
+    self->priv->rootVerBox = GTK_WIDGET(gtk_builder_get_object(builder, "rootVerBox"));
+    DLDownloadWidgetController *downloadWidgetController = dl_download_widget_controller_new();
+    gtk_container_add(GTK_CONTAINER(self->priv->rootVerBox), dl_download_widget_controller_get_download_widget(downloadWidgetController));
+
     g_signal_connect_swapped(self->priv->downloadButton, "clicked",
         G_CALLBACK(dl_application_download_button_clicked), self);
     
     gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(self->priv->progressBar), 0.0f);
+
+    DLDownloadWidget *dlWidget = dl_download_widget_new();
 
     g_object_unref(G_OBJECT(builder));
 }
