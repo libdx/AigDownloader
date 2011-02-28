@@ -24,7 +24,7 @@ struct _DLDownloadWidget
 
 struct _DLDownloadWidgetClass
 {
-    GtkWidgetClass parent_class;
+    GtkVBoxClass parent_class;
 
     // Virtual Methods
     //void (*virt_method)(DLDownloadWidget *);

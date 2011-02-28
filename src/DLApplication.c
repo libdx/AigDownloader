@@ -67,7 +67,7 @@ static void dl_application_init(DLApplication *self)
 
     self->priv->rootVerBox = GTK_WIDGET(gtk_builder_get_object(builder, "rootVerBox"));
     DLDownloadWidgetController *downloadWidgetController = dl_download_widget_controller_new();
-    gtk_container_add(GTK_CONTAINER(self->priv->rootVerBox), dl_download_widget_controller_get_download_widget(downloadWidgetController));
+    //gtk_container_add(GTK_CONTAINER(self->priv->rootVerBox), dl_download_widget_controller_get_download_widget(downloadWidgetController));
 
     g_signal_connect_swapped(self->priv->downloadButton, "clicked",
         G_CALLBACK(dl_application_download_button_clicked), self);
